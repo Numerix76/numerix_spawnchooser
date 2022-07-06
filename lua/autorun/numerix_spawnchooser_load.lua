@@ -11,7 +11,7 @@ SpawnChooser.Language = SpawnChooser.Language or {}
 
 local FileSystem = "spawnchooser"
 local AddonName = "SpawnChooser"
-local Version = "1.0.4"
+local Version = "1.0.5"
 local FromWorshop = false
 
 if SERVER then
