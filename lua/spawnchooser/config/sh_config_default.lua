@@ -15,8 +15,8 @@ SpawnChooser.Settings.CommunityName = "mtxServ"
 --The link to your community website
 SpawnChooser.Settings.CommunityLink = "https://mtxserv.com"
 
-timer.Simple(1, function() --DON'T TOUCH
-    
+timer.Simple(0.1, function() --DON'T TOUCH
+        
     --Job that don't have acces to the menu
     SpawnChooser.Settings.BlackListTeam = {
        --[TEAM_MEDIC] = true,
@@ -25,7 +25,7 @@ timer.Simple(1, function() --DON'T TOUCH
     --Spawn location
     SpawnChooser.Settings.Spawn = {
         ["Downtown"] = {
-            pos= { 
+            pos= {
                 Vector(-3104.230225, 5022.685547, -48.678299),
                 Vector(-3104.230225, 5022.685547, -48.678299),
                 Vector(-3104.230225, 5022.685547, -48.678299),

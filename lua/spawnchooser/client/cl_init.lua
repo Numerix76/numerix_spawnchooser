@@ -19,10 +19,24 @@ local function drawRectOutline( x, y, w, h, color )
 	surface.DrawOutlinedRect( x, y, w, h )
 end
 
-net.Receive( "SpawnChooser:OpenMenu", function()
+local function OpenMenu()
   local numspawn = 0
-  local AllSpawn = net.ReadTable()
-  local team = net.ReadInt(9)
+  local AllSpawn = SpawnChooser.Settings.Spawn
+  local team = LocalPlayer():Team()
+
+  -- Fix for singleplayer
+  if !AllSpawn then
+    timer.Create("SpawnChooser:WaitSettings", 0.1, 0, function()
+      AllSpawn = SpawnChooser.Settings.Spawn
+
+      if AllSpawn then
+        timer.Remove("SpawnChooser:WaitSettings")
+        OpenMenu()
+      end
+    end)
+
+    return
+  end
 
   SpawnBasePanel = vgui.Create( "DFrame" )
   SpawnBasePanel:SetTitle( " " )
@@ -95,10 +109,18 @@ net.Receive( "SpawnChooser:OpenMenu", function()
       gui.OpenURL( SpawnChooser.Settings.CommunityLink )
     end
   end
-end)
+end
 
-net.Receive( "SpawnChooser_CloseMenu" , function ( len , ply )
+local function CloseMenu()
   if IsValid(SpawnBasePanel) then
     SpawnBasePanel:Close()
   end
+end
+
+net.Receive( "SpawnChooser:OpenMenu", function()
+  OpenMenu()
+end)
+
+net.Receive( "SpawnChooser_CloseMenu" , function ( len , ply )
+  CloseMenu()
 end)

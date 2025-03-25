@@ -12,8 +12,6 @@ local function SpawnTP(ply)
 	if !DarkRP and true or !ply:isArrested() then
 		if !SpawnChooser.Settings.BlackListTeam or !SpawnChooser.Settings.BlackListTeam[ply:Team()] then
 			net.Start("SpawnChooser:OpenMenu")
-			net.WriteTable(SpawnChooser.Settings.Spawn)
-			net.WriteInt(ply:Team(), 9)
 			net.Send(ply)
 			ply.spawned = false
 		end
