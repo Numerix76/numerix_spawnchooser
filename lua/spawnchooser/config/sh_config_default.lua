@@ -15,8 +15,8 @@ SpawnChooser.Settings.CommunityName = "mtxServ"
 --The link to your community website
 SpawnChooser.Settings.CommunityLink = "https://mtxserv.com"
 
-timer.Simple(0.1, function() --DON'T TOUCH
-        
+timer.Simple(1, function() --DON'T TOUCH
+
     --Job that don't have acces to the menu
     SpawnChooser.Settings.BlackListTeam = {
        --[TEAM_MEDIC] = true,
