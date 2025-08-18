@@ -22,7 +22,25 @@ end
 local function OpenMenu()
   local numspawn = 0
   local AllSpawn = SpawnChooser.Settings.Spawn
-  local team = LocalPlayer():Team()
+  local player = LocalPlayer()
+  
+
+  -- Workaround to avoid LocalPlayer() being nil because the function is called too fast
+  if !player then
+    timer.Create("SpawnChooser:WaitPlayer", 0.1, 0, function()
+      player = LocalPlayer()
+
+      if player then
+        timer.Remove("SpawnChooser:WaitPlayer")
+        OpenMenu()
+      end
+    end)
+
+    return
+  end
+  
+  
+  local team = player:Team()
 
   -- Fix for singleplayer
   if !AllSpawn then
