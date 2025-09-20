@@ -19,11 +19,16 @@ local function drawRectOutline( x, y, w, h, color )
 	surface.DrawOutlinedRect( x, y, w, h )
 end
 
+local SpawnBasePanel = nil;
+
 local function OpenMenu()
   local numspawn = 0
   local AllSpawn = SpawnChooser.Settings.Spawn
   local player = LocalPlayer()
-  
+
+  if ( IsValid(SpawnBasePanel) ) then
+    SpawnBasePanel:Close()
+  end
 
   -- Workaround to avoid LocalPlayer() being nil because the function is called too fast
   if !player then
@@ -96,7 +101,7 @@ local function OpenMenu()
         net.Start("SpawnChooser:SetPos")
         net.WriteString(k)
         net.SendToServer()
-        SpawnBasePanel:Close()
+        CloseMenu()
       end
 
       numspawn = numspawn + 1
@@ -139,6 +144,6 @@ net.Receive( "SpawnChooser:OpenMenu", function()
   OpenMenu()
 end)
 
-net.Receive( "SpawnChooser_CloseMenu" , function ( len , ply )
+net.Receive( "SpawnChooser:CloseMenu" , function ( len , ply )
   CloseMenu()
 end)
