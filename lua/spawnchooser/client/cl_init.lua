@@ -41,7 +41,7 @@ local function OpenMenu()
     timer.Create("SpawnChooser:WaitPlayer", 0.1, 0, function()
       player = LocalPlayer()
 
-      if player then
+      if IsValid(player) then
         timer.Remove("SpawnChooser:WaitPlayer")
         OpenMenu()
       end
