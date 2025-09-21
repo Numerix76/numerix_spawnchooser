@@ -37,7 +37,7 @@ local function OpenMenu()
   end
 
   -- Workaround to avoid LocalPlayer() being nil because the function is called too fast
-  if !player then
+  if !IsValid(player) then
     timer.Create("SpawnChooser:WaitPlayer", 0.1, 0, function()
       player = LocalPlayer()
 
