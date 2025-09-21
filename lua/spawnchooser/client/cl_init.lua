@@ -21,6 +21,12 @@ end
 
 local SpawnBasePanel = nil;
 
+local function CloseMenu()
+  if IsValid(SpawnBasePanel) then
+    SpawnBasePanel:Close()
+  end
+end
+
 local function OpenMenu()
   local numspawn = 0
   local AllSpawn = SpawnChooser.Settings.Spawn
@@ -131,12 +137,6 @@ local function OpenMenu()
     ButtonInfo.DoClick = function()		   
       gui.OpenURL( SpawnChooser.Settings.CommunityLink )
     end
-  end
-end
-
-local function CloseMenu()
-  if IsValid(SpawnBasePanel) then
-    SpawnBasePanel:Close()
   end
 end
 
