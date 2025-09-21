@@ -14,7 +14,6 @@ local function SpawnTP(ply)
 			(!SpawnChooser.Settings.BlackListTeam or !SpawnChooser.Settings.BlackListTeam[ply:Team()]) and 
 			!IsValid(ply.__PEXRagdoll) and -- Compatibilty for https://steamcommunity.com/sharedfiles/filedetails/?id=1729622779
 			!ply.ULibSpawnInfo and -- Compatibility for ULX
-			!ply.FAdminRagdoll -- Compatibility for FAdmin
 		then
 			net.Start("SpawnChooser:OpenMenu")
 			net.Send(ply)
