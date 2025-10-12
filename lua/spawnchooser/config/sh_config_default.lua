@@ -4,7 +4,7 @@ SpawnChooser made by Numerix (https://steamcommunity.com/id/numerix/)
 
 --------------------------------------------------------------------------------------------------]]
 
-SpawnChooser.Settings.VersionDefault = "1.0.0" --DON'T TOUCH THIS
+SpawnChooser.Settings.VersionDefault = "1.0.1" --DON'T TOUCH THIS
 
 --Change the language
 SpawnChooser.Settings.Language = "en"
@@ -37,6 +37,12 @@ timer.Simple(1, function() --DON'T TOUCH
             --[[restricted = {
                 [TEAM_CITIZEN] = true, --Spawn only available for Citizen
             },]]
+
+            -- Restrict the spawn a to some usergroups
+            --[[groups = {
+                ["admin"] = true,
+                ["superadmin"] = true
+            }]]
         },
         ["Campaign 1"] = {
             pos= { 

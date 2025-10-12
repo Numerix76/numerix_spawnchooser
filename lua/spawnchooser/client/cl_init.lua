@@ -52,6 +52,7 @@ local function OpenMenu()
   
   
   local team = player:Team()
+  local group = player:GetUserGroup()
 
   -- Fix for singleplayer
   if !AllSpawn then
@@ -87,7 +88,10 @@ local function OpenMenu()
   TextInfo:SetContentAlignment(5)
   
   for k, v in SortedPairs(AllSpawn, false) do
-    if v.restricted == false or v.restricted[team] then
+    if 
+      (!istable(v.restricted) or table.IsEmpty(v.restricted) or v.restricted[team ]) and
+      (!istable(v.groups    ) or table.IsEmpty(v.groups    ) or v.groups    [group])
+    then
       local SelectSpawn = vgui.Create( "DButton", SpawnBasePanel )
       SelectSpawn:SetPos( 7.5, 60 + numspawn * 50 )
       SelectSpawn:SetText( k )

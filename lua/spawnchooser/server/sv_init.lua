@@ -25,9 +25,15 @@ hook.Add( "PlayerSpawn", "SpawnChooser:PlayerSpawn", SpawnTP )
 
 net.Receive("SpawnChooser:SetPos", function(len, ply)
 	local SpawnLocation = net.ReadString()
+
+	local spawnChoose = SpawnChooser.Settings.Spawn[SpawnLocation]
 	
-	if !ply.spawned and (SpawnChooser.Settings.Spawn[SpawnLocation].restricted == false or SpawnChooser.Settings.Spawn[SpawnLocation].restricted[ply:Team()]) then
-		ply:SetPos(table.Random(SpawnChooser.Settings.Spawn[SpawnLocation].pos))
+	if 
+		!ply.spawned and 
+		(!istable(spawnChoose.restricted) or table.IsEmpty(spawnChoose.restricted) or spawnChoose.restricted[ply:Team()        ]) and 
+		(!istable(spawnChoose.groups    ) or table.IsEmpty(spawnChoose.group     ) or spawnChoose.groups    [ply:GetUserGroup()])
+	then
+		ply:SetPos(table.Random(spawnChoose.pos))
 		ply.spawned = true
 	end
 
