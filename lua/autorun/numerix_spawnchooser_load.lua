@@ -11,7 +11,7 @@ SpawnChooser.Language = SpawnChooser.Language or {}
 
 local FileSystem = "spawnchooser"
 local AddonName = "SpawnChooser"
-local Version = "1.0.6"
+local Version = "1.0.7"
 local FromWorshop = false
 
 if SERVER then
@@ -65,18 +65,6 @@ if SERVER then
     end
 
     hook.Add("PlayerConnect", "SpawnChooser:Connect", function()
-        if !game.SinglePlayer() then
-            http.Post("https://gmod-radio-numerix.mtxserv.com/api/connect.php", { script = FileSystem, ip = game.GetIPAddress() }, 
-            function(result)
-                if result then 
-                    MsgC( Color( 225, 20, 30 ), "["..AddonName.."]", Color(255,255,255), " Connection established\n") 
-                end
-            end, 
-            function(failed)
-                MsgC( Color( 225, 20, 30 ), "["..AddonName.."]", Color(255,255,255), " Connection failed : "..failed.."\n")
-            end)
-        end
-
         if !FromWorshop then
             http.Fetch( "https://gmod-radio-numerix.mtxserv.com/api/version/"..FileSystem..".txt",
                 function( body, len, headers, code )
@@ -98,21 +86,6 @@ if SERVER then
 
         hook.Remove("PlayerConnect", "SpawnChooser:Connect")
     end)
-
-    hook.Add("ShutDown", "SpawnChooser:Disconnect", function()
-        if !game.SinglePlayer() then
-            http.Post("https://gmod-radio-numerix.mtxserv.com/api/disconnect.php", { script = FileSystem, ip = game.GetIPAddress() }, 
-            function(result)
-                if result then 
-                    MsgC( Color( 225, 20, 30 ), "["..AddonName.."]", Color(255,255,255), " Disconnection\n") 
-                end
-            end, 
-            function(failed)
-                MsgC( Color( 225, 20, 30 ), "["..AddonName.."]", Color(255,255,255), " Disconnection failed : "..failed.."\n")
-            end)
-        end
-    end)
-
 end
 
 if CLIENT then
